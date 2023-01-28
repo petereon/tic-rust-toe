@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "tic-rust-toe"
+name = "tic_rust_toe"
 version = "0.1.0"
