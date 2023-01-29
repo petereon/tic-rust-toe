@@ -1,11 +1,11 @@
 #[cfg(test)]
 mod tic_tac_toe_test {
-    use tic_rust_toe::tic_tac_toe::{self, Player};
+    use tic_rust_toe::tic_tac_toe::{self, Board, Player};
 
     #[test]
     fn test_create_board() {
         assert_eq!(
-            tic_tac_toe::create_board(3),
+            tic_tac_toe::create_board(3).content,
             [None, None, None, None, None, None, None, None, None]
         )
     }
@@ -19,10 +19,14 @@ mod tic_tac_toe_test {
     fn test_place_on_board() {
         assert_eq!(
             tic_tac_toe::place_on_board(
-                [None, None, None, None, None, None, None, None, None].to_vec(),
+                Board {
+                    content: [None, None, None, None, None, None, None, None, None].to_vec(),
+                    size: 3
+                },
                 Player { mark: 'X' },
                 (1, 1)
-            ),
+            )
+            .content,
             [
                 Some(Player { mark: 'X' }),
                 None,
