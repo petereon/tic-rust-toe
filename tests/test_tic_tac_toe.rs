@@ -38,6 +38,28 @@ mod tic_tac_toe_test {
                 None,
                 None
             ]
-        )
+        );
+        assert_eq!(
+            tic_tac_toe::place_on_board(
+                Board {
+                    content: [None, None, None, None, None, None, None, None, None].to_vec(),
+                    size: 3
+                },
+                Player { mark: 'O' },
+                (2, 2)
+            )
+            .content,
+            [
+                None,
+                None,
+                None,
+                None,
+                Some(Player { mark: 'O' }),
+                None,
+                None,
+                None,
+                None
+            ]
+        );
     }
 }
