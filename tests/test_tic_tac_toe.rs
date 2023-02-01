@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tic_tac_toe_test {
-    use tic_rust_toe::tic_tac_toe::{self, Board, Player};
+    use tic_rust_toe::tic_tac_toe::{self, initialize_game, Board, Game, Player};
 
     #[test]
     fn test_create_board() {
@@ -61,5 +61,22 @@ mod tic_tac_toe_test {
                 None
             ]
         );
+    }
+
+    #[test]
+    fn test_initialize_game() {
+        assert_eq!(
+            initialize_game(vec![Player { mark: 'X' }, Player { mark: 'O' }], 2),
+            Game {
+                board: Board {
+                    content: vec![None, None, None, None],
+                    size: 2
+                },
+                current_player: Player { mark: 'X' },
+                players: vec![Player { mark: 'X' }, Player { mark: 'O' }],
+                end: false,
+                message: None
+            }
+        )
     }
 }

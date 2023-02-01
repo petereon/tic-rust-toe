@@ -1,4 +1,4 @@
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Copy)]
 pub struct Player {
     pub mark: char,
 }
@@ -9,6 +9,25 @@ pub struct Board {
 }
 
 type Coords = (u8, u8);
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Game {
+    pub board: Board,
+    pub current_player: Player,
+    pub players: Vec<Player>,
+    pub end: bool,
+    pub message: Option<String>,
+}
+
+pub fn initialize_game(players: Vec<Player>, board_size: u8) -> Game {
+    return Game {
+        board: create_board(board_size),
+        current_player: players[0],
+        players: players,
+        end: false,
+        message: None,
+    };
+}
 
 pub fn create_board(size: u8) -> Board {
     return Board {
