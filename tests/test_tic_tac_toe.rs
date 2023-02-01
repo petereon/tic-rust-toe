@@ -79,4 +79,22 @@ mod tic_tac_toe_test {
             }
         )
     }
+
+    #[test]
+    fn test_switch_players() {
+        assert_eq!(
+            tic_tac_toe::switch_players(
+                vec![Player { mark: 'X' }, Player { mark: 'O' }],
+                Player { mark: 'X' }
+            ),
+            Player { mark: 'O' }
+        );
+        assert_eq!(
+            tic_tac_toe::switch_players(
+                vec![Player { mark: 'X' }, Player { mark: 'O' }],
+                Player { mark: 'O' }
+            ),
+            Player { mark: 'X' }
+        );
+    }
 }

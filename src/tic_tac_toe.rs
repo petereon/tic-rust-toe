@@ -46,3 +46,10 @@ pub fn place_on_board(board: Board, _player: Player, _position: Coords) -> Board
     _ = std::mem::replace(&mut new_board.content[usize::from(position)], Some(_player));
     return new_board;
 }
+
+pub fn switch_players(players: Vec<Player>, current_player: Player) -> Player {
+    let index =
+        (players.iter().position(|&r| r == current_player).unwrap() + 1).rem_euclid(players.len());
+
+    return players[index];
+}
