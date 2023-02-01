@@ -43,7 +43,7 @@ pub fn create_player(mark: char) -> Player {
 pub fn place_on_board(board: Board, _player: Player, _position: Coords) -> Board {
     let mut new_board = board;
     let position: u8 = ((_position.0 - 1) * new_board.size + (_position.1 - 1)).into();
-    _ = std::mem::replace(&mut new_board.content[usize::from(position)], Some(_player));
+    new_board.content[usize::from(position)] = Some(_player);
     return new_board;
 }
 
