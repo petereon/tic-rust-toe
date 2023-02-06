@@ -97,4 +97,38 @@ mod tic_tac_toe_test {
             Player { mark: 'X' }
         );
     }
+
+    #[test]
+    fn test_is_board_full() {
+        assert_eq!(
+            tic_tac_toe::is_board_full(Board {
+                content: vec![
+                    Some(Player { mark: 'X' }),
+                    Some(Player { mark: 'O' }),
+                    Some(Player { mark: 'X' }),
+                    Some(Player { mark: 'O' })
+                ],
+                size: 2
+            }),
+            true
+        );
+        assert_eq!(
+            tic_tac_toe::is_board_full(Board {
+                content: vec![
+                    Some(Player { mark: 'X' }),
+                    Some(Player { mark: 'O' }),
+                    None,
+                    Some(Player { mark: 'O' })
+                ],
+                size: 2
+            }),
+            false
+        );
+    }
+
+    #[test]
+    fn test_index_from_coords() {
+        assert_eq!(tic_tac_toe::index_from_coords((1, 1), 3), 0);
+        assert_eq!(tic_tac_toe::index_from_coords((2, 2), 3), 4);
+    }
 }

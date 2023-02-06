@@ -40,9 +40,13 @@ pub fn create_player(mark: char) -> Player {
     return Player { mark: mark };
 }
 
+pub fn index_from_coords(coords: Coords, board_size: u8) -> u8 {
+    return (coords.0 - 1) * board_size + (coords.1 - 1);
+}
+
 pub fn place_on_board(board: Board, _player: Player, _position: Coords) -> Board {
-    let mut new_board = board;
-    let position: u8 = ((_position.0 - 1) * new_board.size + (_position.1 - 1)).into();
+    let mut new_board = board.clone();
+    let position: u8 = index_from_coords(_position, board.size);
     new_board.content[usize::from(position)] = Some(_player);
     return new_board;
 }
@@ -52,4 +56,8 @@ pub fn switch_players(players: Vec<Player>, current_player: Player) -> Player {
         (players.iter().position(|&r| r == current_player).unwrap() + 1).rem_euclid(players.len());
 
     return players[index];
+}
+
+pub fn is_board_full(board: Board) -> bool {
+    return board.content.iter().all(|&x| x.is_some());
 }
