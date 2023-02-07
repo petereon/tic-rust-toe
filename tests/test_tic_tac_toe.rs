@@ -131,4 +131,43 @@ mod tic_tac_toe_test {
         assert_eq!(tic_tac_toe::index_from_coords((1, 1), 3), 0);
         assert_eq!(tic_tac_toe::index_from_coords((2, 2), 3), 4);
     }
+
+    #[test]
+    fn test_check_horizontal() {
+        assert_eq!(
+            tic_tac_toe::check_horizontal(
+                &Board {
+                    content: vec![
+                        Some(Player { mark: 'X' }),
+                        Some(Player { mark: 'X' }),
+                        Some(Player { mark: 'X' }),
+                        None,
+                        None,
+                        None,
+                        None,
+                        None,
+                        None
+                    ],
+                    size: 3
+                },
+                1
+            ),
+            true
+        );
+        assert_eq!(
+            tic_tac_toe::check_horizontal(
+                &Board {
+                    content: vec![
+                        Some(Player { mark: 'X' }),
+                        None,
+                        Some(Player { mark: 'X' }),
+                        None,
+                    ],
+                    size: 2
+                },
+                2
+            ),
+            false
+        );
+    }
 }
