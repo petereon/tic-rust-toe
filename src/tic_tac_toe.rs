@@ -86,9 +86,8 @@ pub fn check_victory(board: Board, player: Player) -> bool {
 }
 
 pub fn check_vertical(board: &Board, i: u8) -> bool {
-    // TODO: Test this
     for j in 1..board.size + 1 {
-        let idx = index_from_coords((i, j), board.size);
+        let idx = index_from_coords((j, i), board.size);
         if board.content[idx as usize].is_none() {
             return false;
         }
@@ -98,9 +97,7 @@ pub fn check_vertical(board: &Board, i: u8) -> bool {
 
 pub fn check_horizontal(board: &Board, i: u8) -> bool {
     for j in 1..board.size + 1 {
-        println!("{} {}", i, j);
         let idx = index_from_coords((i, j), board.size);
-        println!("{:?}", board.content[idx as usize]);
         if board.content[idx as usize].is_none() {
             return false;
         }
@@ -109,7 +106,6 @@ pub fn check_horizontal(board: &Board, i: u8) -> bool {
 }
 
 pub fn check_diagonal(board: &Board, player: Player) -> bool {
-    // TODO: Test this
     for j in 1..board.size + 1 {
         let idx = index_from_coords((j, j), board.size);
         if board.content[idx as usize] != Some(player) {
@@ -120,9 +116,8 @@ pub fn check_diagonal(board: &Board, player: Player) -> bool {
 }
 
 pub fn check_inverse_diagonal(board: &Board, player: Player) -> bool {
-    // TODO: Test this
     for j in 1..board.size + 1 {
-        let idx = index_from_coords((j, board.size - j), board.size);
+        let idx = index_from_coords((j, board.size + 1 - j), board.size);
         if board.content[idx as usize] != Some(player) {
             return false;
         }

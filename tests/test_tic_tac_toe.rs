@@ -170,4 +170,106 @@ mod tic_tac_toe_test {
             false
         );
     }
+
+    #[test]
+    fn test_check_vertical() {
+        assert_eq!(
+            tic_tac_toe::check_vertical(
+                &Board {
+                    content: vec![
+                        Some(Player { mark: 'X' }),
+                        None,
+                        Some(Player { mark: 'X' }),
+                        None,
+                    ],
+                    size: 2
+                },
+                1
+            ),
+            true
+        );
+        assert_eq!(
+            tic_tac_toe::check_vertical(
+                &Board {
+                    content: vec![
+                        Some(Player { mark: 'X' }),
+                        Some(Player { mark: 'X' }),
+                        None,
+                        None,
+                    ],
+                    size: 2
+                },
+                2
+            ),
+            false
+        );
+    }
+
+    #[test]
+    fn test_check_diagonal() {
+        assert_eq!(
+            tic_tac_toe::check_diagonal(
+                &Board {
+                    content: vec![
+                        Some(Player { mark: 'X' }),
+                        None,
+                        None,
+                        Some(Player { mark: 'X' }),
+                    ],
+                    size: 2
+                },
+                Player { mark: 'X' }
+            ),
+            true
+        );
+        assert_eq!(
+            tic_tac_toe::check_diagonal(
+                &Board {
+                    content: vec![
+                        Some(Player { mark: 'X' }),
+                        Some(Player { mark: 'X' }),
+                        None,
+                        None,
+                    ],
+                    size: 2
+                },
+                Player { mark: 'X' }
+            ),
+            false
+        );
+    }
+
+    #[test]
+    fn check_inverse_diagonal() {
+        assert_eq!(
+            tic_tac_toe::check_inverse_diagonal(
+                &Board {
+                    content: vec![
+                        None,
+                        Some(Player { mark: 'X' }),
+                        Some(Player { mark: 'X' }),
+                        None,
+                    ],
+                    size: 2
+                },
+                Player { mark: 'X' }
+            ),
+            true
+        );
+        assert_eq!(
+            tic_tac_toe::check_inverse_diagonal(
+                &Board {
+                    content: vec![
+                        Some(Player { mark: 'X' }),
+                        Some(Player { mark: 'X' }),
+                        None,
+                        None,
+                    ],
+                    size: 2
+                },
+                Player { mark: 'X' }
+            ),
+            false
+        );
+    }
 }
