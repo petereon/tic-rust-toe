@@ -272,4 +272,67 @@ mod tic_tac_toe_test {
             false
         );
     }
+    #[test]
+    fn test_check_victory() {
+        assert_eq!(
+            tic_tac_toe::check_victory(
+                Board {
+                    content: vec![
+                        Some(Player { mark: 'X' }),
+                        Some(Player { mark: 'X' }),
+                        Some(Player { mark: 'X' }),
+                        None,
+                        None,
+                        None,
+                        None,
+                        None,
+                        None
+                    ],
+                    size: 3
+                },
+                Player { mark: 'X' }
+            ),
+            true
+        );
+        assert_eq!(
+            tic_tac_toe::check_victory(
+                Board {
+                    content: vec![
+                        Some(Player { mark: 'X' }),
+                        None,
+                        None,
+                        Some(Player { mark: 'X' }),
+                        None,
+                        None,
+                        Some(Player { mark: 'X' }),
+                        None,
+                        None
+                    ],
+                    size: 3
+                },
+                Player { mark: 'X' }
+            ),
+            true
+        );
+        assert_eq!(
+            tic_tac_toe::check_victory(
+                Board {
+                    content: vec![
+                        Some(Player { mark: 'X' }),
+                        None,
+                        None,
+                        Some(Player { mark: 'X' }),
+                        None,
+                        None,
+                        Some(Player { mark: 'X' }),
+                        None,
+                        None
+                    ],
+                    size: 3
+                },
+                Player { mark: 'O' }
+            ),
+            false
+        );
+    }
 }
