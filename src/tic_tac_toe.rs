@@ -1,3 +1,5 @@
+use std::process::exit;
+
 #[derive(Debug, Clone, PartialEq, Eq, Copy)]
 pub struct Player {
     pub mark: char,
@@ -73,11 +75,11 @@ pub fn check_victory(board: Board, player: Player) -> bool {
     for i in 1..board.size + 1 {
         let idx = index_from_coords((i, i), board.size);
         if board.content[idx as usize] == Some(player) {
-            if check_horizontal(&board, i) {
+            if check_horizontal(&board, player, i) {
                 return true;
             }
 
-            if check_vertical(&board, i) {
+            if check_vertical(&board, player, i) {
                 return true;
             }
         }
@@ -85,20 +87,20 @@ pub fn check_victory(board: Board, player: Player) -> bool {
     return false;
 }
 
-pub fn check_vertical(board: &Board, i: u8) -> bool {
+pub fn check_vertical(board: &Board, player: Player, i: u8) -> bool {
     for j in 1..board.size + 1 {
         let idx = index_from_coords((j, i), board.size);
-        if board.content[idx as usize].is_none() {
+        if board.content[idx as usize] != Some(player) {
             return false;
         }
     }
     return true;
 }
 
-pub fn check_horizontal(board: &Board, i: u8) -> bool {
+pub fn check_horizontal(board: &Board, player: Player, i: u8) -> bool {
     for j in 1..board.size + 1 {
         let idx = index_from_coords((i, j), board.size);
-        if board.content[idx as usize].is_none() {
+        if board.content[idx as usize] != Some(player) {
             return false;
         }
     }
@@ -123,4 +125,53 @@ pub fn check_inverse_diagonal(board: &Board, player: Player) -> bool {
         }
     }
     return true;
+}
+
+pub fn get_input(input: &str) -> u8 {
+    println!("{}", input);
+    let mut line = String::new();
+    std::io::stdin().read_line(&mut line).unwrap();
+    let number: u8 = line.trim().parse().unwrap();
+    return number;
+}
+
+pub fn print_board(board: &Board) {
+    let mut i = 0;
+    for _ in 0..board.size {
+        for _ in 0..board.size {
+            print!("|");
+            match board.content[i] {
+                Some(player) => print!("{}", player.mark),
+                None => print!(" "),
+            }
+            i += 1;
+        }
+        println!("|");
+    }
+}
+
+pub fn play_a_game() {
+    let game = initialize_game([Player { mark: 'X' }, Player { mark: 'O' }].to_vec(), 3);
+    let mut board = game.board;
+    let mut player = game.current_player;
+    let players = game.players;
+    print_board(&board);
+    loop {
+        board = place_on_board(
+            board.clone(),
+            player,
+            (get_input("Row number"), get_input("Column number")),
+        );
+        print_board(&board);
+        if check_victory(board.clone(), player) {
+            println!("Player {} won!", player.mark);
+            exit(0);
+        }
+
+        if is_board_full(board.clone()) {
+            println!("It's a draw!");
+            exit(0);
+        }
+        player = switch_players(players.clone(), player);
+    }
 }

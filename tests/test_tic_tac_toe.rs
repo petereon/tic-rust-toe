@@ -150,6 +150,7 @@ mod tic_tac_toe_test {
                     ],
                     size: 3
                 },
+                Player { mark: 'X' },
                 1
             ),
             true
@@ -165,6 +166,7 @@ mod tic_tac_toe_test {
                     ],
                     size: 2
                 },
+                Player { mark: 'X' },
                 2
             ),
             false
@@ -184,6 +186,7 @@ mod tic_tac_toe_test {
                     ],
                     size: 2
                 },
+                Player { mark: 'X' },
                 1
             ),
             true
@@ -199,6 +202,7 @@ mod tic_tac_toe_test {
                     ],
                     size: 2
                 },
+                Player { mark: 'X' },
                 2
             ),
             false

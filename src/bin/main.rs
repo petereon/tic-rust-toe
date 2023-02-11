@@ -1,3 +1,5 @@
+use tic_rust_toe::tic_tac_toe;
+
 fn main() {
-    println!("Hello, world!");
+    tic_tac_toe::play_a_game()
 }
